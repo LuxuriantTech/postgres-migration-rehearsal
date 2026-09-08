@@ -1,0 +1,32 @@
+{
+  "version": "PMR-DEMO-20260908-v1",
+  "image_manifest": "sha256:1a5aa9ff157a2390e11e5e30965be8c4f1d50ea14264f2dd4f9c38bd4ad7cbbd",
+  "image_config": "sha256:d3b733054757a7473a37b8f9f8f5fd5d60dddb5b2f3a54260f9d866daba4cd18",
+  "platform": "linux/amd64",
+  "source_date_epoch": 1788825600,
+  "docker_sha256": "a429e235ef670ea83357a5c8c7451f0a69d485a6fee49f9032fd938a0ab4969d",
+  "source_sha256": {
+    "control-room-data/fixtures-v1.json": "99884817d491f5d01c1be10179172b1948691fa17430132bcf2251f98e45c3bb",
+    "docker/init/001_roles.sql": "1826ef5abe58e29b6166cbf2b1ecc124690f53822c5151c0cc5f62f099b71316",
+    "migrations/0001_initial.sql": "f157aea918eaa17298de134f1458c7d7da3f75046b3185a261b550dbcd727c5b",
+    "migrations/0002_expand.sql": "505d7445f20abadbc20f5420af7fa8dae844ca98f3c01777b6a46eef8a72b622",
+    "migrations/0003_compatibility.sql": "3317524a0fbd75d3dd6b4883e6bb27c022c9d333e30e1fde4e26fd0b9c6c6a2f",
+    "migrations/0004_switch.sql": "423f98a8b97526c4e908805d42ee5a3c720efd4a0f3e3c3c5f99ba5605a0c34a",
+    "migrations/0005_contract.sql": "db7628d3a563aab481eac31696f50a8272b64f1e4dcf7e6a3bbbc25404b267dc",
+    "runtime-baselines/demo-20260908/Dockerfile": "d0cc9e5119f3cd3a8c6d542197923e00a35e3ca79f726c07068c5d2933a0d1da",
+    "scripts/control_room_engine.py": "c6f4e37f61b525ff21e31878e730b07236bf13fe325a91412ce7f806534f9e7c",
+    "src/migration_rehearsal/__init__.py": "31f516a456ef0ea32138a10219e36bd1bbb05cb190bf369ff575f943505f7893",
+    "src/migration_rehearsal/ci.py": "0de39e6e5f48a157b5ba07b43bcf30cb60e8aa0ed17b32bc68fa9bcf7a00c904",
+    "src/migration_rehearsal/clients.py": "6c85407d4aacebb269447aa1abc37f309701506b1abd599221aa20b1c30a1996",
+    "src/migration_rehearsal/contract.py": "353e050335942b93473a86a1f176d8566dc708d59d449e48be2acac203f08b21",
+    "src/migration_rehearsal/control_room_adapter.py": "0a115888600bafb61a77744e97111b82f7d7f693f1910f38fcfc11ef161d66df",
+    "src/migration_rehearsal/control_room_http.py": "4c3455376dd145291b29671ede66c673e68ae91b9938d848a2a5b5f23484a325",
+    "src/migration_rehearsal/control_room_runtime/__init__.py": "0d20b7a94ed6f564c19c22c59b8af5438b854e972c0cd30a045504d92cfbf4f9",
+    "src/migration_rehearsal/control_room_runtime/relay.py": "5d193dda98b844566388f971c3a93374c224d340e502caed442ef6e485c20122",
+    "src/migration_rehearsal/control_room_runtime/sync.py": "5399ec90815b9c918512367235896423e24269fb8ed629d9492dc2057983d891",
+    "src/migration_rehearsal/demo.py": "b347406ce0867ffeb80839d5ebe1f484526dc7b899d83c6c869252133551fe68",
+    "src/migration_rehearsal/final_once.py": "bfeed22ae6c2c778df5fd9e436773031ec3515386e8c2f0e26e3f2cfa30a36ec",
+    "src/migration_rehearsal/final_runner.py": "a79fb8a9b147f2568256c9aec778e42e6faa4af322c7f5358e3d72052fc54319",
+    "src/migration_rehearsal/sync.py": "ea638489b2814fceac194a274fd9820809ec9b9f76d770f5bee78b22846693bb"
+  }
+}

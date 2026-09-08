@@ -1,8 +1,14 @@
 # PostgreSQL Migration Rehearsal
 
+[Try the interactive synthetic demo](https://project-atlas-six-delta.vercel.app/projects/postgres-migration-rehearsal/) · [Demo source and local preview](docs/interactive-demo/README.md) · [Contact me](mailto:mehajardian@gmail.com)
+
 Rehearse a small invoice-schema change in disposable local PostgreSQL and inspect the migration, integrity checks and cleanup separately.
 
-## Current reproducibility limit
+## New independent local baseline
+
+The optional [PMR-DEMO-20260908-v1 CLI](runtime-baselines/demo-20260908/README.md) now completes a new six-invoice rehearsal using a separately versioned, reproducible image. The original browser reference and historical Phase B remain unchanged. [Browser provenance details](docs/BROWSER_PROVENANCE_20260908.md) explain why LOW02 remains open.
+
+## Frozen browser reproducibility limit
 
 The browser interface starts, but the real rehearsal currently rejects a fresh build of its PostgreSQL image. The integrity check expects a previously frozen local image identity that is not available in this checkout. A successful build is not enough to satisfy that check. The failure occurs before database work. Do not weaken the hash check to force a pass. The current supported recruiter format is the static walkthrough.
 

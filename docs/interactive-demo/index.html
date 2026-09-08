@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PostgreSQL Migration Rehearsal</title>
+<link rel="stylesheet" href="site.css">
+<link rel="icon" href="data:,">
+</head>
+<body class="sheet" data-demo="pmr">
+<a class="skip" href="#main">Skip to the migration sheet</a>
+<header class="site-head">
+<a href="https://project-atlas-six-delta.vercel.app/projects/">← five local studies</a>
+<nav aria-label="Project navigation">
+<a href="https://project-atlas-six-delta.vercel.app/projects/toolcall-replay/">ToolCall</a>
+<a href="https://project-atlas-six-delta.vercel.app/projects/entity-resolution-workbench/">Entity</a>
+<a aria-current="page" href="./index.html">PMR</a>
+<a href="https://project-atlas-six-delta.vercel.app/projects/api-contract-guard/">ACG</a>
+<a href="https://project-atlas-six-delta.vercel.app/projects/evidencedesk/">EvidenceDesk</a>
+</nav>
+</header>
+<main class="wrap" id="main" tabindex="-1">
+<p class="eyebrow">Local synthetic PostgreSQL rehearsal</p>
+<p class="quiet">Static walkthrough • synthetic examples • local interface available; engine setup currently blocked.</p>
+<h1>Change an invoice shape without hiding the route back.</h1>
+<p class="lede">PostgreSQL Migration Rehearsal makes a small disposable migration observable: the source shape, target shape, five stages, checks, cleanup, and rollback route sit in one local control room.</p>
+<p><a href="https://github.com/LuxuriantTech/postgres-migration-rehearsal/tree/main">Source and local setup on GitHub</a></p>
+<div class="actions" aria-label="PostgreSQL Migration Rehearsal actions">
+<a class="action primary" href="#interactive-demo">Try the prepared preview</a>
+<a class="action" href="https://github.com/LuxuriantTech/postgres-migration-rehearsal/tree/main">GitHub</a>
+<a class="action" href="mailto:mehajardian@gmail.com?subject=PostgreSQL%20Migration%20Rehearsal">Contact me</a>
+</div>
+<section class="demo" id="interactive-demo" aria-labelledby="pmr-demo-title">
+<div class="demo-head"><div><p class="eyebrow">Interactive prepared preview</p><h2 id="pmr-demo-title">Follow the five-stage rehearsal</h2></div><button class="action" type="button" id="pmr-reset">Reset preview</button></div>
+<p>All values are fictional. This guided report runs only in the browser and never starts PostgreSQL, Docker, a database, or a migration.</p>
+<div class="demo-controls"><label>Stage<select id="pmr-stage" data-initial="0"><option value="0">1. Expand</option><option value="1">2. Compatibility</option><option value="2">3. Backfill</option><option value="3">4. Switch</option><option value="4">5. Contract</option></select></label></div>
+<p id="pmr-live" class="sr-status" aria-live="polite"></p><div id="pmr-output" class="demo-output" aria-live="polite"></div>
+</section>
+<section class="panel"><h2>A separate local baseline now runs</h2><p>The opt-in <code>PMR-DEMO-20260908-v1</code> CLI completed a new six-invoice rehearsal, rollback and cleanup after two matching image builds. It preserves the frozen browser reference and does not replay Phase B. <a href="https://github.com/LuxuriantTech/postgres-migration-rehearsal/tree/main/runtime-baselines/demo-20260908">Baseline source and instructions</a>.</p><p>This hosted preview still uses prepared data. LOW02 remains open for browser binaries and supporting system libraries.</p></section>
+<section class="notice"><strong>Frozen browser reproducibility limit</strong><p>The interface starts, but a fresh PostgreSQL image build is rejected by the runtime integrity check. The recorded successful rehearsal below is historical evidence from the prepared local environment; it is not proof that a fresh clone can run the engine. The required image identity and browser-dependency provenance remain open.</p></section>
+<section class="grid two">
+<article class="panel">
+<h2>Before</h2>
+<p>
+<code>invoices.amount_cents</code>
+</p>
+<p>One integer amount field in the source invoice shape.</p>
+</article>
+<article class="panel">
+<h2>After</h2>
+<p>
+<code>invoices.amount_minor</code>
+<br>
+<code>invoices.currency_code</code>
+</p>
+<p>Invoice IDs and values remain visible while the shape changes.</p>
+</article>
+</section>
+<section class="spaced">
+<h2>Five ordered stages</h2>
+<div class="stages">
+<div>
+<b>1. Expand</b>add nullable target columns</div>
+<div>
+<b>2. Compatibility</b>allow temporary old and new write shapes</div>
+<div>
+<b>3. Backfill</b>resume small batches; check idempotence</div>
+<div>
+<b>4. Switch</b>move reads and writes to the target shape</div>
+<div>
+<b>5. Contract</b>remove the legacy column after the boundary closes</div>
+</div>
+</section>
+<figure class="figure">
+<img src="assets/pmr-real-local-result.png" alt="Recorded local result for a six-invoice synthetic migration rehearsal, showing a completed migration and separately confirmed cleanup.">
+<figcaption>Recorded result of the six-invoice synthetic local run. Cleanup is shown separately from the migration verdict.</figcaption>
+</figure>
+<div class="grid two">
+<section>
+<h2>The bounded example</h2>
+<p>The primary example is a six-invoice synthetic local run. It is distinct from the historical 4,096-row development demonstration. Historical Phase B is a frozen, one-shot record with no browser run control and is not rerun here.</p>
+</section>
+<section class="panel">
+<h2>Failure states matter</h2>
+<p>A deliberately invalid synthetic scenario is rejected before database work. A deterministic error fixture shows that an unconfirmed cleanup blocks another run; it is not evidence of a failed real migration.</p>
+</section>
+</div>
+<details>
+<summary>Local start and stop</summary>
+<pre class="command">
+<code>uv sync --frozen
+npm ci --ignore-scripts
+npm run control-room:start
+npm run control-room:stop</code>
+</pre>
+<p>Prerequisites are the project Python environment, exact Node dependencies installed with <code>npm ci</code>, Docker's local default socket, and the already-present frozen PostgreSQL image. Then open the loopback control room at <code>http://127.0.0.1:8787</code>. Do not expose the engine online.</p>
+</details>
+<section class="notice">
+<strong>LOW02 remains incomplete</strong>Browser producer provenance records observed executables and dependency snapshots, but it retains same-user and host-administrator trust assumptions. It is explicitly incomplete provenance, not a supply-chain attestation.</section>
+</main>
+<footer class="site-foot">
+<p>I define the needs, organize AI-assisted work, review the code with AI support, test the journeys, and improve the result. AI contributes strongly to implementation; I am still developing my ability to write code independently. <a href="mailto:mehajardian@gmail.com?subject=PostgreSQL%20Migration%20Rehearsal">mehajardian@gmail.com</a></p>
+</footer>
+<script src="demo.js"></script>
+</body>
+</html>
