@@ -1,0 +1,2 @@
+# Keep portable shell entry points in LF form.
+*.sh text eol=lf

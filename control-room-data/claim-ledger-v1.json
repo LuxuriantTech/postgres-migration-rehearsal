@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "claims": [
+    {
+      "claim_id": "CR-CLAIM-001",
+      "public_claim": "Synthetic · local only · no external database",
+      "classification": "PROVED_LOCAL",
+      "evidence": [
+        "browser-tests/control-room.spec.js::initial scenario explains the local migration before execution",
+        "tests/test_control_room_adapter.py::test_all_container_commands_pin_default_context",
+        "src/migration_rehearsal/control_room_adapter.py"
+      ],
+      "scope": "Default control-room inputs and runtime are fixed to versioned synthetic fixtures and the exact local Docker context."
+    },
+    {
+      "claim_id": "CR-CLAIM-002",
+      "public_claim": "The local runner applies the migration through existing PMR interfaces to a disposable PostgreSQL database.",
+      "classification": "PROVED_LOCAL",
+      "evidence": [
+        "browser-tests/real-engine.spec.js::browser action reaches the real PMR engine and returns visible evidence",
+        "scripts/control_room_engine.py",
+        "migrations/0001_initial.sql"
+      ],
+      "scope": "One bounded disposable PostgreSQL operation calls the existing PMR functions; it is not the full Phase A demo or Phase B."
+    },
+    {
+      "claim_id": "CR-CLAIM-003",
+      "public_claim": "The database is disposable.",
+      "classification": "PROVED_LOCAL",
+      "evidence": [
+        "browser-tests/real-engine.spec.js::browser action reaches the real PMR engine and returns visible evidence",
+        "tests/test_control_room_adapter.py::test_partial_compose_up_runs_compensating_down_and_writes_closed_receipt"
+      ],
+      "scope": "Only the nonce-owned local Compose resources and fixed-name database are created and removed."
+    },
+    {
+      "claim_id": "CR-CLAIM-004",
+      "public_claim": "Local rehearsal passed",
+      "classification": "PROVED_LOCAL",
+      "evidence": [
+        "browser-tests/real-engine.spec.js::browser action reaches the real PMR engine and returns visible evidence",
+        "scripts/control_room_engine.py::_observe_final"
+      ],
+      "scope": "Verdict applies only to the selected small synthetic fixture and observed bounded checks."
+    },
+    {
+      "claim_id": "CR-CLAIM-005",
+      "public_claim": "The tested route back to the prior schema.",
+      "classification": "PROVED_LOCAL",
+      "evidence": [
+        "scripts/control_room_engine.py::run",
+        "src/migration_rehearsal/contract.py::attempt_down",
+        "browser-tests/real-engine.spec.js::browser action reaches the real PMR engine and returns visible evidence"
+      ],
+      "scope": "Observed only in the disposable local database; no production recovery claim is made."
+    },
+    {
+      "claim_id": "CR-CLAIM-006",
+      "public_claim": "Historical Phase B record",
+      "classification": "HISTORICAL",
+      "evidence": [
+        "HANDOFF.md::État Phase B courant au 2026-09-02",
+        "control-room-data/historical-phase-b-v1.json",
+        "tests/test_control_room_adapter.py::test_historical_manifest_is_tracked_display_data_with_known_digest"
+      ],
+      "scope": "Displays a minimized tracked record of local synthetic Phase B. The presentation punctuation differs from the archived manifest label without changing that payload. Its later CONFIRMED field is shown beside the raw AWAITING_ADVERSARIAL_REVIEW terminal state, but the raw reviewer output was not retained and is not durable independent-review proof. Owner-mutable ignored originals are not read at runtime."
+    },
+    {
+      "claim_id": "CR-CLAIM-007",
+      "public_claim": "This control room cannot run or alter Phase B.",
+      "classification": "PROVED_LOCAL",
+      "evidence": [
+        "tests/test_control_room_http.py",
+        "src/migration_rehearsal/control_room_http.py",
+        "browser-tests/control-room.spec.js::historical Phase B keeps raw terminal state separate from its later review"
+      ],
+      "scope": "No browser/API route invokes demo, final-once, reports/final, or a Phase B mutation."
+    },
+    {
+      "claim_id": "CR-CLAIM-008",
+      "public_claim": "Operations: future human responsibility",
+      "classification": "LIMITATION",
+      "evidence": [
+        "web/control-room/index.html#operations",
+        "docs/CONTROL_ROOM_SPEC.md::Out of Scope"
+      ],
+      "scope": "Approval windows, live monitoring, traffic state, backups, and recovery authority are outside this local product."
+    },
+    {
+      "claim_id": "CR-CLAIM-009",
+      "public_claim": "Production safety",
+      "classification": "UNKNOWN",
+      "evidence": [
+        "docs/CONTROL_ROOM_SPEC.md::Out of Scope"
+      ],
+      "scope": "No production database, traffic, deployment, or operator acceptance was tested."
+    },
+    {
+      "claim_id": "CR-CLAIM-010",
+      "public_claim": "A nontechnical evaluator will understand every control without assistance.",
+      "classification": "UNKNOWN",
+      "evidence": [
+        "docs/CONTROL_ROOM_SPEC.md::Out of Scope"
+      ],
+      "scope": "Automated accessibility and journey checks do not substitute for moderated comprehension testing."
+    },
+    {
+      "claim_id": "CR-CLAIM-011",
+      "public_claim": "Automated scanners establish complete application security.",
+      "classification": "LIMITATION",
+      "evidence": [
+        "docs/CONTROL_ROOM_SPEC.md::NFR-14",
+        "docs/CONTROL_ROOM_VALIDATION.md"
+      ],
+      "scope": "Dependency, secret, and filesystem scans are separate evidence inputs, not a security verdict."
+    },
+    {
+      "claim_id": "CR-CLAIM-012",
+      "public_claim": "Bounded scope",
+      "classification": "LIMITATION",
+      "evidence": [
+        "scripts/control_room_engine.py::_response",
+        "web/control-room/app.js::renderResult"
+      ],
+      "scope": "The small browser run omits the full-volume, concurrent-client, and failpoint matrix."
+    },
+    {
+      "claim_id": "CR-CLAIM-013",
+      "public_claim": "A schema change can break application code or alter stored values. This small local sample lets you inspect its checks and tested route back.",
+      "classification": "PROVED_LOCAL",
+      "evidence": [
+        "web/control-room/index.html#page-title",
+        "docs/ARCHITECTURE_CONTRACT.md",
+        "browser-tests/control-room.spec.js::initial scenario explains the local migration before execution",
+        "browser-tests/control-room.spec.js::happy path exposes checks, rollback evidence, limitations, and one-action reset",
+        "browser-tests/control-room.spec.js::result exposes the observed status of every migration stage"
+      ],
+      "scope": "Frames the compatibility and value-integrity risk, then describes the checks and rollback route exposed by the local synthetic UI; it does not claim production behavior."
+    },
+    {
+      "claim_id": "CR-CLAIM-014",
+      "public_claim": "Local cleanup was not confirmed. Do not run another rehearsal. Stop the local service and inspect its cleanup receipt.",
+      "classification": "LIMITATION",
+      "evidence": [
+        "web/control-room/app.js::blockRunUntilCleanupReview",
+        "browser-tests/control-room.spec.js::unconfirmed cleanup overrides retry copy and blocks another run",
+        "browser-tests/control-room.spec.js::malformed service JSON blocks retry because cleanup is unconfirmed",
+        "browser-tests/control-room.spec.js::partial success payload cannot use an unverified cleanup field to enable retry",
+        "browser-tests/control-room.spec.js::reset keeps a late unconfirmed cleanup visible and blocks another run"
+      ],
+      "scope": "Shown only when the client cannot verify cleanup as complete or not_needed; it disables another run and makes no claim that cleanup occurred."
+    },
+    {
+      "claim_id": "CR-CLAIM-015",
+      "public_claim": "Browser producer provenance is incomplete.",
+      "classification": "LIMITATION",
+      "evidence": [
+        "scripts/control_room_browser_provenance.mjs",
+        "tests/test_product_tooling.py::test_browser_provenance_inventory_is_bound_to_the_installed_lock_snapshot",
+        "docs/PORTFOLIO.md::Evidence and limits"
+      ],
+      "scope": "The manifest records the pinned image, exact observed entrypoints, lockfile validation, dependency tree digest and source snapshots before and after execution. Same-UID mutation, host administration, and unenumerated browser support libraries prevent a complete supply-chain claim."
+    },
+    {
+      "claim_id": "CR-CLAIM-016",
+      "public_claim": "Development was strongly AI-assisted.",
+      "classification": "LIMITATION",
+      "evidence": [
+        "docs/PORTFOLIO.md::My role"
+      ],
+      "scope": "Owner-provided authorship disclosure: the owner can follow and explain the code but is still learning to write this implementation independently; no unaided coding claim is made."
+    }
+  ]
+}

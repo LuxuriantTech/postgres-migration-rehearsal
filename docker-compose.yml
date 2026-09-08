@@ -1,0 +1,30 @@
+name: postgres-migration-rehearsal
+
+services:
+  postgres:
+    image: postgres-migration-rehearsal:contract2
+    build:
+      context: docker/postgres
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    cpus: 1
+    mem_limit: 512m
+    pids_limit: 128
+    user: 70:70
+    environment:
+      POSTGRES_DB: migration_rehearsal_test
+      POSTGRES_USER: rehearsal_app
+      POSTGRES_PASSWORD: synthetic-local-only
+    command: ["postgres", "-c", "max_connections=20"]
+    ports:
+      - "127.0.0.1:55432:5432"
+    tmpfs:
+      - /var/lib/postgresql:rw,noexec,nosuid,size=256m,uid=70,gid=70,mode=0700
+    volumes:
+      - ./docker/init/001_roles.sql:/docker-entrypoint-initdb.d/001_roles.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rehearsal_app -d migration_rehearsal_test"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+      start_period: 2s

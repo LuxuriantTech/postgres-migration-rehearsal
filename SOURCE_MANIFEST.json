@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "scope": "Public runtime source; canonical local Git history is not copied",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "source_sha256": "be9554a55976920ee41fc248b1973ceadfa829aa33d358e0e4ab31e63027cc02",
+      "release_sha256": "be9554a55976920ee41fc248b1973ceadfa829aa33d358e0e4ab31e63027cc02"
+    },
+    {
+      "path": ".python-version",
+      "source_sha256": "f50159fad3f4319868eb38717b91d55843c41e9803014c8de05e116a6d0bcfdc",
+      "release_sha256": "f50159fad3f4319868eb38717b91d55843c41e9803014c8de05e116a6d0bcfdc"
+    },
+    {
+      "path": "control-room-compose.yml",
+      "source_sha256": "b77658cfc4b8dc5fa135325516043b7d01e3e201a8f6a222c5ca2e0429dfa96c",
+      "release_sha256": "b77658cfc4b8dc5fa135325516043b7d01e3e201a8f6a222c5ca2e0429dfa96c"
+    },
+    {
+      "path": "control-room-data/claim-ledger-v1.json",
+      "source_sha256": "4c1fdf85b715b785432ce48b6f540032d68ddde10bb7c8af470ad2000d0f2c96",
+      "release_sha256": "4c1fdf85b715b785432ce48b6f540032d68ddde10bb7c8af470ad2000d0f2c96"
+    },
+    {
+      "path": "control-room-data/fixtures-v1.json",
+      "source_sha256": "99884817d491f5d01c1be10179172b1948691fa17430132bcf2251f98e45c3bb",
+      "release_sha256": "99884817d491f5d01c1be10179172b1948691fa17430132bcf2251f98e45c3bb"
+    },
+    {
+      "path": "control-room-data/historical-phase-b-v1.json",
+      "source_sha256": "4f0e0334f7054ce8f9b030ddb78fd0292ec317b2758d6c375704e9f265b596a8",
+      "release_sha256": "4f0e0334f7054ce8f9b030ddb78fd0292ec317b2758d6c375704e9f265b596a8"
+    },
+    {
+      "path": "docker-compose.yml",
+      "source_sha256": "741a205f905f031f32d0fc6e3605f8fb4fe279fbc6f669ed4ce8de482204a160",
+      "release_sha256": "741a205f905f031f32d0fc6e3605f8fb4fe279fbc6f669ed4ce8de482204a160"
+    },
+    {
+      "path": "docker/init/001_roles.sql",
+      "source_sha256": "1826ef5abe58e29b6166cbf2b1ecc124690f53822c5151c0cc5f62f099b71316",
+      "release_sha256": "1826ef5abe58e29b6166cbf2b1ecc124690f53822c5151c0cc5f62f099b71316"
+    },
+    {
+      "path": "docker/postgres/Dockerfile",
+      "source_sha256": "a724a29208bc07394fe08370c47271156288f4538a0485a73f38747e6c13a9d4",
+      "release_sha256": "a724a29208bc07394fe08370c47271156288f4538a0485a73f38747e6c13a9d4"
+    },
+    {
+      "path": "migrations/0001_initial.sql",
+      "source_sha256": "f157aea918eaa17298de134f1458c7d7da3f75046b3185a261b550dbcd727c5b",
+      "release_sha256": "f157aea918eaa17298de134f1458c7d7da3f75046b3185a261b550dbcd727c5b"
+    },
+    {
+      "path": "migrations/0002_expand.sql",
+      "source_sha256": "505d7445f20abadbc20f5420af7fa8dae844ca98f3c01777b6a46eef8a72b622",
+      "release_sha256": "505d7445f20abadbc20f5420af7fa8dae844ca98f3c01777b6a46eef8a72b622"
+    },
+    {
+      "path": "migrations/0003_compatibility.sql",
+      "source_sha256": "3317524a0fbd75d3dd6b4883e6bb27c022c9d333e30e1fde4e26fd0b9c6c6a2f",
+      "release_sha256": "3317524a0fbd75d3dd6b4883e6bb27c022c9d333e30e1fde4e26fd0b9c6c6a2f"
+    },
+    {
+      "path": "migrations/0004_switch.sql",
+      "source_sha256": "423f98a8b97526c4e908805d42ee5a3c720efd4a0f3e3c3c5f99ba5605a0c34a",
+      "release_sha256": "423f98a8b97526c4e908805d42ee5a3c720efd4a0f3e3c3c5f99ba5605a0c34a"
+    },
+    {
+      "path": "migrations/0005_contract.sql",
+      "source_sha256": "db7628d3a563aab481eac31696f50a8272b64f1e4dcf7e6a3bbbc25404b267dc",
+      "release_sha256": "db7628d3a563aab481eac31696f50a8272b64f1e4dcf7e6a3bbbc25404b267dc"
+    },
+    {
+      "path": "package-lock.json",
+      "source_sha256": "c850037bad0db895a0ee25c857c7ad776daa522f0c22d63b587adc37051993ba",
+      "release_sha256": "c850037bad0db895a0ee25c857c7ad776daa522f0c22d63b587adc37051993ba"
+    },
+    {
+      "path": "package.json",
+      "source_sha256": "bcde71ec4c8e9171c6933ab5708a3553b9a25dfff9b43e7b97109cbf4873d240",
+      "release_sha256": "335b64a87d76ea5ae537f7fd5f3680034e9e434e332ef76ab154c20b8f823d34",
+      "change": "Remove commands for private historical/browser-proof harnesses absent from this runtime release; installed dependencies are unchanged."
+    },
+    {
+      "path": "pyproject.toml",
+      "source_sha256": "9fca7c0661e57efdbc506e452f871714b94c1ffd57d65589f7d6d6066a829146",
+      "release_sha256": "9fca7c0661e57efdbc506e452f871714b94c1ffd57d65589f7d6d6066a829146"
+    },
+    {
+      "path": "scripts/build_control_room.mjs",
+      "source_sha256": "3a96419533d3529b0e32133861fa625e55e8091f051eb2899266a36f4523d296",
+      "release_sha256": "3a96419533d3529b0e32133861fa625e55e8091f051eb2899266a36f4523d296"
+    },
+    {
+      "path": "scripts/control_room.py",
+      "source_sha256": "3926c421a79b99fc1c0c7a1b6a9024e4242b859ea20219ad618046fa2382571e",
+      "release_sha256": "3926c421a79b99fc1c0c7a1b6a9024e4242b859ea20219ad618046fa2382571e"
+    },
+    {
+      "path": "scripts/control_room_engine.py",
+      "source_sha256": "c6f4e37f61b525ff21e31878e730b07236bf13fe325a91412ce7f806534f9e7c",
+      "release_sha256": "c6f4e37f61b525ff21e31878e730b07236bf13fe325a91412ce7f806534f9e7c"
+    },
+    {
+      "path": "scripts/prepare_control_room.mjs",
+      "source_sha256": "53835adc8117b3d7aa21d4526240469846af5db4e69862ba146040652ce0e946",
+      "release_sha256": "53835adc8117b3d7aa21d4526240469846af5db4e69862ba146040652ce0e946"
+    },
+    {
+      "path": "src/migration_rehearsal/__init__.py",
+      "source_sha256": "31f516a456ef0ea32138a10219e36bd1bbb05cb190bf369ff575f943505f7893",
+      "release_sha256": "31f516a456ef0ea32138a10219e36bd1bbb05cb190bf369ff575f943505f7893"
+    },
+    {
+      "path": "src/migration_rehearsal/ci.py",
+      "source_sha256": "0de39e6e5f48a157b5ba07b43bcf30cb60e8aa0ed17b32bc68fa9bcf7a00c904",
+      "release_sha256": "0de39e6e5f48a157b5ba07b43bcf30cb60e8aa0ed17b32bc68fa9bcf7a00c904"
+    },
+    {
+      "path": "src/migration_rehearsal/clients.py",
+      "source_sha256": "6c85407d4aacebb269447aa1abc37f309701506b1abd599221aa20b1c30a1996",
+      "release_sha256": "6c85407d4aacebb269447aa1abc37f309701506b1abd599221aa20b1c30a1996"
+    },
+    {
+      "path": "src/migration_rehearsal/contract.py",
+      "source_sha256": "353e050335942b93473a86a1f176d8566dc708d59d449e48be2acac203f08b21",
+      "release_sha256": "353e050335942b93473a86a1f176d8566dc708d59d449e48be2acac203f08b21"
+    },
+    {
+      "path": "src/migration_rehearsal/control_room_adapter.py",
+      "source_sha256": "0a115888600bafb61a77744e97111b82f7d7f693f1910f38fcfc11ef161d66df",
+      "release_sha256": "0a115888600bafb61a77744e97111b82f7d7f693f1910f38fcfc11ef161d66df"
+    },
+    {
+      "path": "src/migration_rehearsal/control_room_http.py",
+      "source_sha256": "4c3455376dd145291b29671ede66c673e68ae91b9938d848a2a5b5f23484a325",
+      "release_sha256": "4c3455376dd145291b29671ede66c673e68ae91b9938d848a2a5b5f23484a325"
+    },
+    {
+      "path": "src/migration_rehearsal/control_room_runtime/__init__.py",
+      "source_sha256": "0d20b7a94ed6f564c19c22c59b8af5438b854e972c0cd30a045504d92cfbf4f9",
+      "release_sha256": "0d20b7a94ed6f564c19c22c59b8af5438b854e972c0cd30a045504d92cfbf4f9"
+    },
+    {
+      "path": "src/migration_rehearsal/control_room_runtime/relay.py",
+      "source_sha256": "5d193dda98b844566388f971c3a93374c224d340e502caed442ef6e485c20122",
+      "release_sha256": "5d193dda98b844566388f971c3a93374c224d340e502caed442ef6e485c20122"
+    },
+    {
+      "path": "src/migration_rehearsal/control_room_runtime/sync.py",
+      "source_sha256": "5399ec90815b9c918512367235896423e24269fb8ed629d9492dc2057983d891",
+      "release_sha256": "5399ec90815b9c918512367235896423e24269fb8ed629d9492dc2057983d891"
+    },
+    {
+      "path": "src/migration_rehearsal/demo.py",
+      "source_sha256": "b347406ce0867ffeb80839d5ebe1f484526dc7b899d83c6c869252133551fe68",
+      "release_sha256": "b347406ce0867ffeb80839d5ebe1f484526dc7b899d83c6c869252133551fe68"
+    },
+    {
+      "path": "src/migration_rehearsal/final_once.py",
+      "source_sha256": "bfeed22ae6c2c778df5fd9e436773031ec3515386e8c2f0e26e3f2cfa30a36ec",
+      "release_sha256": "bfeed22ae6c2c778df5fd9e436773031ec3515386e8c2f0e26e3f2cfa30a36ec"
+    },
+    {
+      "path": "src/migration_rehearsal/final_runner.py",
+      "source_sha256": "a79fb8a9b147f2568256c9aec778e42e6faa4af322c7f5358e3d72052fc54319",
+      "release_sha256": "a79fb8a9b147f2568256c9aec778e42e6faa4af322c7f5358e3d72052fc54319"
+    },
+    {
+      "path": "src/migration_rehearsal/sync.py",
+      "source_sha256": "ea638489b2814fceac194a274fd9820809ec9b9f76d770f5bee78b22846693bb",
+      "release_sha256": "ea638489b2814fceac194a274fd9820809ec9b9f76d770f5bee78b22846693bb"
+    },
+    {
+      "path": "tests/conftest.py",
+      "source_sha256": "359f58aa72b9222c32d119dbb6abc24ad3c869a1b1227c754278d369e8e9301a",
+      "release_sha256": "359f58aa72b9222c32d119dbb6abc24ad3c869a1b1227c754278d369e8e9301a"
+    },
+    {
+      "path": "tests/test_control_room_adapter.py",
+      "source_sha256": "0cff30cae5f2e35902d44f6130cc2e644443aeda6bd4439da6fe02e8ac2937fc",
+      "release_sha256": "0cff30cae5f2e35902d44f6130cc2e644443aeda6bd4439da6fe02e8ac2937fc"
+    },
+    {
+      "path": "tests/test_control_room_http.py",
+      "source_sha256": "b2e9d310320c086b99289ced699137434656a6322345d349cb232e9c42d55a1e",
+      "release_sha256": "b2e9d310320c086b99289ced699137434656a6322345d349cb232e9c42d55a1e"
+    },
+    {
+      "path": "tests/test_control_room_relay.py",
+      "source_sha256": "4ec433c55e26bd808b6454d49e1805538adbac4c8b393ba39204c7b61bf15761",
+      "release_sha256": "4ec433c55e26bd808b6454d49e1805538adbac4c8b393ba39204c7b61bf15761"
+    },
+    {
+      "path": "uv.lock",
+      "source_sha256": "b92bd3aba36667a8b59ed32285f4a74ca7ab3a4fa06c8f374c8b9baafcb2c872",
+      "release_sha256": "b92bd3aba36667a8b59ed32285f4a74ca7ab3a4fa06c8f374c8b9baafcb2c872"
+    },
+    {
+      "path": "web/control-room/app.css",
+      "source_sha256": "eabf3dbab7a978b56715eff81286e8bc06269c6528b957a3113a7a2467913e48",
+      "release_sha256": "eabf3dbab7a978b56715eff81286e8bc06269c6528b957a3113a7a2467913e48"
+    },
+    {
+      "path": "web/control-room/app.js",
+      "source_sha256": "dfe697fc8bca31a2ecf7432b711bf3842e45a0e1bb9b612c4c28eb15a8fc56c6",
+      "release_sha256": "dfe697fc8bca31a2ecf7432b711bf3842e45a0e1bb9b612c4c28eb15a8fc56c6"
+    },
+    {
+      "path": "web/control-room/favicon.svg",
+      "source_sha256": "6310306d2912e62c30a3e010692c563b5dfe8c464ee160f6ac4beb2f3d0f4c43",
+      "release_sha256": "6310306d2912e62c30a3e010692c563b5dfe8c464ee160f6ac4beb2f3d0f4c43"
+    },
+    {
+      "path": "web/control-room/index.html",
+      "source_sha256": "8ee3aac6beaa7a96202c20350f50d79474a88a30106617e4b812fb4c61e8e1bf",
+      "release_sha256": "8ee3aac6beaa7a96202c20350f50d79474a88a30106617e4b812fb4c61e8e1bf"
+    },
+    {
+      "path": "web/control-room/site.webmanifest",
+      "source_sha256": "bf5cd9b63de1e9e772b0f7cb535c47fed217e5984721a5a056208c958e7fe9c6",
+      "release_sha256": "bf5cd9b63de1e9e772b0f7cb535c47fed217e5984721a5a056208c958e7fe9c6"
+    }
+  ]
+}

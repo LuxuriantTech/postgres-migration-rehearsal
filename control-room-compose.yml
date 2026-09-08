@@ -1,0 +1,11 @@
+services:
+  postgres:
+    environment:
+      POSTGRES_PASSWORD: pmr-test-password-placeholder-not-a-secret
+    ports: !reset []
+    networks:
+      control_room_internal: {}
+
+networks:
+  control_room_internal:
+    internal: true

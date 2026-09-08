@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "application_source_unchanged": true,
+  "runtime_test_files": [
+    "tests/test_control_room_adapter.py",
+    "tests/test_control_room_http.py",
+    "tests/test_control_room_relay.py"
+  ],
+  "excluded_categories": [
+    "private CPL adoption and orchestration records",
+    "historical evidence hashes and fixed build-artifact pins tied to the canonical private checkpoint",
+    "one-shot final research runners",
+    "private logs and original Git history"
+  ],
+  "test_selection_fixed_before_execution": true,
+  "canonical_local_tests_preserved": true
+}

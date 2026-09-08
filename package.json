@@ -1,0 +1,20 @@
+{
+  "name": "pmr-migration-control-room",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "24.15.0"
+  },
+  "scripts": {
+    "build": "node scripts/build_control_room.mjs",
+    "control-room:start": "node scripts/prepare_control_room.mjs && .venv/bin/python scripts/control_room.py start",
+    "control-room:stop": ".venv/bin/python scripts/control_room.py stop"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.62.1",
+    "chrome-launcher": "1.2.1",
+    "lighthouse": "13.4.1"
+  }
+}

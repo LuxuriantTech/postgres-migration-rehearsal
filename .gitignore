@@ -1,0 +1,12 @@
+.venv/
+node_modules/
+__pycache__/
+.pytest_cache/
+.coverage
+dist/
+out/
+.ci-artifacts/
+.erw.lock
+.control-room/
+reports/
+.tools/

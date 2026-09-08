@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A local, synthetic PostgreSQL migration rehearsal with evidence-led gates.">
+    <meta name="theme-color" content="#17261f">
+    <title>Migration Control Room: PMR</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="/app.css">
+    <script src="/app.js" type="module"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to the rehearsal</a>
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="PMR control room home">
+        <span class="wordmark-mark" aria-hidden="true">PMR</span>
+        <span>PostgreSQL Migration Rehearsal</span>
+      </a>
+      <p class="scope-badge"><span aria-hidden="true"></span>Synthetic · local only · no external database</p>
+    </header>
+
+    <main id="workspace" tabindex="-1">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Local migration evidence</p>
+        <h1 id="page-title">Rehearse one invoice schema change</h1>
+        <p class="lede">A schema change can break application code or alter stored values. This small local
+          sample lets you inspect its checks and tested route back.</p>
+        <p class="term-guide"><strong>Rehearsal</strong> means a disposable local run. A <strong>gate</strong>
+          is a check backed by evidence. <strong>Rollback</strong> is the tested route to the prior schema.</p>
+        <ul class="boundary-strip" aria-label="Control room boundaries">
+          <li><strong>Local run</strong><span>Current and runnable</span></li>
+          <li><strong>Phase B record</strong><span>Historical and read-only</span></li>
+          <li><strong>Operations</strong><span>Future human responsibility</span></li>
+        </ul>
+      </section>
+
+      <section id="phase-a" class="workspace-panel" aria-labelledby="phase-a-title">
+        <header class="section-heading">
+          <div>
+            <p class="section-index">Current local run</p>
+            <h2 id="phase-a-title">Run the six-invoice sample</h2>
+          </div>
+          <p class="section-note">The local runner applies the migration through existing PMR interfaces to a
+            disposable PostgreSQL database.</p>
+        </header>
+
+        <div class="scenario-layout">
+          <form class="scenario-controls" id="scenario-form">
+            <label for="scenario-select">Synthetic scenario</label>
+            <select id="scenario-select" name="scenario_id" disabled>
+              <option>Loading scenarios…</option>
+            </select>
+            <p id="scenario-purpose" class="field-help">Loading the local fixture catalogue.</p>
+            <p id="scenario-count" class="row-count" aria-live="polite"></p>
+            <p id="scenario-provenance" class="fixture-provenance"></p>
+            <div class="button-row">
+              <button id="run-button" class="button button-primary" type="submit" disabled>Run local rehearsal</button>
+              <button id="reset-button" class="button button-secondary" type="button">Reset control room</button>
+            </div>
+            <p id="running-status" class="running-status" tabindex="-1" hidden></p>
+            <p id="run-recovery" class="run-recovery" role="alert" hidden></p>
+          </form>
+
+          <div class="schema-compare" aria-label="Schema comparison">
+            <article>
+              <p class="schema-kicker">Current contract</p>
+              <h3>Source today</h3>
+              <ul id="source-schema" class="code-list"></ul>
+            </article>
+            <div class="direction" aria-hidden="true">→</div>
+            <article>
+              <p class="schema-kicker">Intended contract</p>
+              <h3>Destination after migration</h3>
+              <ul id="destination-schema" class="code-list"></ul>
+            </article>
+          </div>
+        </div>
+
+        <div id="live-status" class="sr-only" role="status" aria-live="polite"></div>
+        <section id="run-output" class="run-output" aria-labelledby="run-output-title" hidden>
+          <h3 id="run-output-title">Current rehearsal result</h3>
+          <div id="run-content"></div>
+        </section>
+
+        <details id="technical-stages" class="secondary-details">
+          <summary>
+            <span>Preview the five migration stages</span>
+            <small>Technical sequence</small>
+          </summary>
+          <div class="details-body stage-preview">
+            <p>Ordered to keep old and new application versions compatible.</p>
+            <ol class="stage-list">
+              <li><span>1</span><strong>Baseline</strong><small>Verify the starting shape</small></li>
+              <li><span>2</span><strong>Expand</strong><small>Add the target fields</small></li>
+              <li><span>3</span><strong>Backfill</strong><small>Move existing values</small></li>
+              <li><span>4</span><strong>Switch</strong><small>Move writes to the target</small></li>
+              <li><span>5</span><strong>Contract</strong><small>Remove the legacy field</small></li>
+            </ol>
+          </div>
+        </details>
+      </section>
+
+      <section id="phase-b" class="boundary-panel" aria-labelledby="phase-b-title">
+        <p class="section-index">Historical record</p>
+        <h2 id="phase-b-title">Historical Phase B record</h2>
+        <details id="historical-details" class="section-disclosure">
+          <summary>
+            <span>Review the retained records and limits</span>
+            <small>Read-only; no rerun control</small>
+          </summary>
+          <div id="phase-b-evidence" class="evidence-placeholder" aria-live="polite">Loading the historical record…</div>
+        </details>
+      </section>
+
+      <section id="operations" class="operations-panel" aria-labelledby="operations-title">
+        <p class="section-index">Operational responsibility</p>
+        <h2 id="operations-title">What remains outside this rehearsal</h2>
+        <details id="operations-details" class="section-disclosure">
+          <summary>
+            <span>Review future production controls</span>
+            <small>Not performed here</small>
+          </summary>
+          <ul class="operations-list">
+            <li><strong>Approval window</strong><span>Named owners and a scheduled change window.</span></li>
+            <li><strong>Live monitoring</strong><span>Database health, lock pressure, and application errors.</span></li>
+            <li><strong>Recovery authority</strong><span>A human decision backed by current backups and traffic state.</span></li>
+          </ul>
+          <p class="limit-note">Credentials, external databases, production traffic, deployment, and publication are not part of this local product.</p>
+        </details>
+      </section>
+    </main>
+
+    <footer>
+      <p>PMR control room · local synthetic rehearsal</p>
+      <a href="#page-title">Back to top</a>
+    </footer>
+  </body>
+</html>

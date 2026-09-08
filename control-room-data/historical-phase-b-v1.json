@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "kind": "historical_phase_b_evidence",
+  "rerunnable": false,
+  "label": "Historical evidence — no rerun available",
+  "source_commit": "bd16659f130c9316036cf902575dc9fcbff81f06",
+  "result_status": "PHASE_B_GATES_PASSED_AWAITING_ADVERSARIAL_REVIEW",
+  "independent_review_status": "CONFIRMED",
+  "report_outcome": "ALL_GATES_PASSED",
+  "report_gate_count": 12,
+  "report_sha256": "cb8b3ee60ad1f194d88e075690f2657d96bce1e5bfe21daf497878c930d7096b",
+  "result_sha256": "12f7361a8111e90021930f8e5231bac554c25c8f9636e56ec5116365a5c95347",
+  "freeze_sha256": "666e3e020c653bfdf9ac0272faeb071be25bb30c37ec712f0483d0b156116fb8",
+  "protocol_sha256": "666e3e020c653bfdf9ac0272faeb071be25bb30c37ec712f0483d0b156116fb8",
+  "attempt_id": "b462089bf5306607b53c5fe4acf99b1cd4cf2320f78c08de721bb8aaed72a26d",
+  "summary": {
+    "tests_passed": 277,
+    "covered_branches": 472,
+    "total_branches": 588,
+    "branch_coverage_percent": 80.27210884353741
+  },
+  "limits": [
+    "This is local synthetic historical evidence.",
+    "The one-shot Phase B operation is not available from this control room.",
+    "The raw rereview output is not retained here; the minimized historical review field is not durable independent-review proof."
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "default_scenario_id": "small-shop",
+  "source": {
+    "kind": "synthetic",
+    "authoring_method": "hand-authored deterministic fixture",
+    "license_status": "project-authored synthetic data",
+    "limitation": "Six rows are a bounded local rehearsal, not production data."
+  },
+  "scenarios": [
+    {
+      "id": "small-shop",
+      "title": "Small shop ledger",
+      "purpose": "See six synthetic invoices move through the local rehearsal.",
+      "expected_outcome": "ready",
+      "rows": [
+        {"invoice_id": 101, "amount_cents": 1250},
+        {"invoice_id": 102, "amount_cents": 2400},
+        {"invoice_id": 103, "amount_cents": 99},
+        {"invoice_id": 104, "amount_cents": 5000},
+        {"invoice_id": 105, "amount_cents": 725},
+        {"invoice_id": 106, "amount_cents": 3100}
+      ]
+    },
+    {
+      "id": "empty-ledger",
+      "title": "Empty ledger",
+      "purpose": "Confirm that the same safe path handles no rows to migrate.",
+      "expected_outcome": "empty",
+      "rows": []
+    },
+    {
+      "id": "invalid-negative-amount",
+      "title": "Invalid amount",
+      "purpose": "Show field-level recovery before the database operation starts.",
+      "expected_outcome": "rejected",
+      "rows": [{"invoice_id": 201, "amount_cents": -1}]
+    }
+  ]
+}
