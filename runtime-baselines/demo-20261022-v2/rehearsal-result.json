@@ -1,0 +1,189 @@
+{
+  "baseline": "PMR-DEMO-20261022-v2",
+  "baseline_image": "sha256:1a5aa9ff157a2390e11e5e30965be8c4f1d50ea14264f2dd4f9c38bd4ad7cbbd",
+  "checks": [
+    {
+      "detail": "Observed in the disposable database.",
+      "evidence_id": "integrity",
+      "id": "destination_matches_source",
+      "label": "Destination matches source",
+      "status": "pass"
+    }
+  ],
+  "cleanup_state": "complete",
+  "destination_rows": [
+    {
+      "amount_minor": 1250,
+      "currency_code": "EUR",
+      "invoice_id": 101
+    },
+    {
+      "amount_minor": 2400,
+      "currency_code": "EUR",
+      "invoice_id": 102
+    },
+    {
+      "amount_minor": 99,
+      "currency_code": "EUR",
+      "invoice_id": 103
+    },
+    {
+      "amount_minor": 5000,
+      "currency_code": "EUR",
+      "invoice_id": 104
+    },
+    {
+      "amount_minor": 725,
+      "currency_code": "EUR",
+      "invoice_id": 105
+    },
+    {
+      "amount_minor": 3100,
+      "currency_code": "EUR",
+      "invoice_id": 106
+    }
+  ],
+  "evidence": {
+    "backfill": {
+      "cycles": 2,
+      "initial_first_pass_rows": 6,
+      "initial_idempotent_pass_rows": 0,
+      "roll_forward_first_pass_rows": 6,
+      "roll_forward_idempotent_pass_rows": 0
+    },
+    "fixture_sha256": "2a6206eb87b82cce3edf8b5c1edc42e63527c3892d199f2c2e5b88c9569bb256",
+    "integrity": {
+      "destination_matches_source": true,
+      "final_phase": "contract",
+      "ledger_complete": true,
+      "legacy_column_absent": true,
+      "no_target_nulls": true,
+      "row_count": 6
+    },
+    "interfaces": [
+      "contract._apply_migration",
+      "contract._start_backfill",
+      "contract._run_backfill_batch",
+      "contract._finish_backfill_enable_v2",
+      "contract.attempt_down"
+    ],
+    "migration_sha256": {
+      "0001": "f157aea918eaa17298de134f1458c7d7da3f75046b3185a261b550dbcd727c5b",
+      "0002": "505d7445f20abadbc20f5420af7fa8dae844ca98f3c01777b6a46eef8a72b622",
+      "0003": "3317524a0fbd75d3dd6b4883e6bb27c022c9d333e30e1fde4e26fd0b9c6c6a2f",
+      "0004": "423f98a8b97526c4e908805d42ee5a3c720efd4a0f3e3c3c5f99ba5605a0c34a",
+      "0005": "db7628d3a563aab481eac31696f50a8272b64f1e4dcf7e6a3bbbc25404b267dc"
+    },
+    "operation_limit": "No full-volume, concurrent-client, or failpoint exercise.",
+    "postgresql_version": "18.6",
+    "rollback": {
+      "down_phase": "initial",
+      "legacy_rows_restored": true,
+      "roll_forward_complete": true
+    }
+  },
+  "historical_phase_b_replayed": false,
+  "mode": "bounded_disposable_database_operation",
+  "next_action": "Review the local evidence and reset when ready.",
+  "owned_resources_remaining": 0,
+  "rollback_plan": [
+    {
+      "evidence_id": "rollback",
+      "label": "Return to the baseline shape",
+      "observed": true,
+      "order": 1
+    },
+    {
+      "evidence_id": "rollback",
+      "label": "Roll forward through the contract",
+      "observed": true,
+      "order": 2
+    }
+  ],
+  "run_id": "e98c1adbab79af85f9066d4e56a6e5aa4878460cd6073b2f5a1fb3ff99cda61e",
+  "scenario_id": "small-shop",
+  "schema_version": 1,
+  "source_rows": [
+    {
+      "amount_cents": 1250,
+      "invoice_id": 101
+    },
+    {
+      "amount_cents": 2400,
+      "invoice_id": 102
+    },
+    {
+      "amount_cents": 99,
+      "invoice_id": 103
+    },
+    {
+      "amount_cents": 5000,
+      "invoice_id": 104
+    },
+    {
+      "amount_cents": 725,
+      "invoice_id": 105
+    },
+    {
+      "amount_cents": 3100,
+      "invoice_id": 106
+    }
+  ],
+  "stages": [
+    {
+      "evidence_ids": [
+        "baseline"
+      ],
+      "explanation": "Observed locally.",
+      "id": "baseline",
+      "label": "Baseline",
+      "status": "complete"
+    },
+    {
+      "evidence_ids": [
+        "expand"
+      ],
+      "explanation": "Observed locally.",
+      "id": "expand",
+      "label": "Expand",
+      "status": "complete"
+    },
+    {
+      "evidence_ids": [
+        "backfill"
+      ],
+      "explanation": "Observed locally.",
+      "id": "backfill",
+      "label": "Backfill",
+      "status": "complete"
+    },
+    {
+      "evidence_ids": [
+        "switch"
+      ],
+      "explanation": "Observed locally.",
+      "id": "switch",
+      "label": "Switch",
+      "status": "complete"
+    },
+    {
+      "evidence_ids": [
+        "contract"
+      ],
+      "explanation": "Observed locally.",
+      "id": "contract",
+      "label": "Contract",
+      "status": "complete"
+    }
+  ],
+  "summary": "The disposable local database completed the bounded migration path.",
+  "verdict": "LOCAL_REHEARSAL_PASSED",
+  "verdict_label": "Local rehearsal passed",
+  "warnings": [
+    {
+      "detail": "This six-row rehearsal does not exercise the full-volume or concurrent-client paths.",
+      "id": "bounded_scope",
+      "label": "Bounded scope"
+    }
+  ]
+}

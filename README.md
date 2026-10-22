@@ -6,7 +6,7 @@ Rehearse a small invoice-schema change in disposable local PostgreSQL and inspec
 
 ## Run the six-invoice CLI baseline
 
-The [PMR-DEMO-20260908-v1 procedure](runtime-baselines/demo-20260908/README.md) uses the public fixture, migration engine and a separately pinned PostgreSQL image. It is a new local rehearsal, distinct from the historical Phase B and browser image. Requires Linux amd64, Python 3.12.14, uv and a local Docker Engine with BuildKit OCI export support. From a clean checkout, use the full build procedure linked above; the essential sequence is:
+The [PMR-DEMO-20260908-v1 procedure](runtime-baselines/demo-20260908/README.md) uses the public fixture, migration engine and a separately pinned PostgreSQL image. It is a new local rehearsal, distinct from the historical Phase B and browser image. Requires Linux amd64, Python 3.12.14, uv and a local Docker Engine with BuildKit OCI export support. Windows users can run it inside WSL 2, provided the WSL distribution has the required Linux Docker executable and its `default` context reaches the local engine socket. See the linked procedure for the WSL preflight and complete commands.
 
 ```sh
 uv sync --frozen

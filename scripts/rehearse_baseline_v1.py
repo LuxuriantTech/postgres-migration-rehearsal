@@ -19,6 +19,8 @@ ROOT = Path(__file__).resolve().parents[1]
 BASELINE = ROOT / "runtime-baselines/demo-20260908/baseline.json"
 DOCKER = "/usr/bin/docker"
 BASELINE_SHA256 = "feb4ce482d64d4331d080a5c518ecdc8bc716e810f2e57e486a942928be50dd4"
+BASELINE_VERSION = "PMR-DEMO-20260908-v1"
+RESOURCE_PREFIX = "pmr-demo-v1-"
 
 
 def docker(*args: str) -> str:
@@ -40,12 +42,56 @@ def verify_image(image: dict, baseline: dict) -> None:
         raise RuntimeError("demo baseline image identity mismatch")
 
 
-def preflight() -> dict:
-    raw = BASELINE.read_bytes()
-    if hashlib.sha256(raw).hexdigest() != BASELINE_SHA256:
-        raise RuntimeError("reviewed demo baseline manifest changed")
+def verify_docker_binary(path: Path, expected_sha256: str) -> None:
+    try:
+        actual_sha256 = hashlib.sha256(path.read_bytes()).hexdigest()
+    except OSError as error:
+        raise RuntimeError(f"required Docker executable is unavailable: {path}") from error
+    if actual_sha256 != expected_sha256:
+        raise RuntimeError(
+            "Docker executable integrity check failed at "
+            f"{path}: expected sha256:{expected_sha256}, got sha256:{actual_sha256}. "
+            "Use the reviewed Linux amd64 Docker executable; do not update the pin "
+            "to bypass this check."
+        )
+
+
+def verify_package_version(name: str, expected_version: str) -> None:
+    try:
+        actual_version = subprocess.check_output(
+            ["dpkg-query", "-W", "-f=${Version}", name],
+            text=True,
+            timeout=10,
+            stderr=subprocess.PIPE,
+        ).strip()
+    except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired) as error:
+        raise RuntimeError(f"required reviewed package is unavailable: {name}") from error
+    if actual_version != expected_version:
+        raise RuntimeError(
+            f"package version mismatch for {name}: expected {expected_version}, "
+            f"got {actual_version}"
+        )
+
+
+def preflight(
+    *,
+    baseline_path: Path | None = None,
+    baseline_sha256: str | None = None,
+    expected_version: str | None = None,
+) -> dict:
+    baseline_path = baseline_path or BASELINE
+    baseline_sha256 = baseline_sha256 or BASELINE_SHA256
+    expected_version = expected_version or BASELINE_VERSION
+    raw = baseline_path.read_bytes()
+    actual_baseline_sha256 = hashlib.sha256(raw).hexdigest()
+    if actual_baseline_sha256 != baseline_sha256:
+        raise RuntimeError(
+            "reviewed demo baseline manifest changed: "
+            f"expected sha256:{baseline_sha256}, got sha256:{actual_baseline_sha256}. "
+            "Check that Git preserved LF line endings in pinned files."
+        )
     baseline = json.loads(raw)
-    if baseline["version"] != "PMR-DEMO-20260908-v1":
+    if baseline["version"] != expected_version:
         raise RuntimeError("unknown demo baseline")
     if any(
         os.environ.get(key)
@@ -60,8 +106,48 @@ def preflight() -> dict:
         )
     ):
         raise RuntimeError("container runtime overrides are not allowed")
-    if hashlib.sha256(Path(DOCKER).read_bytes()).hexdigest() != baseline["docker_sha256"]:
-        raise RuntimeError("demo baseline Docker executable changed")
+    if baseline.get("platform") == "linux/amd64":
+        import platform
+
+        if platform.system() != "Linux" or platform.machine() not in {"x86_64", "amd64"}:
+            raise RuntimeError("Linux amd64 is required for this demo baseline")
+    verify_docker_binary(Path(DOCKER), baseline["docker_sha256"])
+    if baseline.get("docker_package"):
+        verify_package_version(
+            baseline["docker_package"]["name"], baseline["docker_package"]["version"]
+        )
+    if baseline.get("engine_sha256"):
+        verify_docker_binary(Path("/usr/bin/dockerd"), baseline["engine_sha256"])
+    if baseline.get("engine_package"):
+        verify_package_version(
+            baseline["engine_package"]["name"], baseline["engine_package"]["version"]
+        )
+    if baseline.get("buildx_sha256"):
+        verify_docker_binary(
+            Path("/usr/libexec/docker/cli-plugins/docker-buildx"),
+            baseline["buildx_sha256"],
+        )
+    if baseline.get("buildx_package"):
+        verify_package_version(
+            baseline["buildx_package"]["name"], baseline["buildx_package"]["version"]
+        )
+    if baseline.get("docker_version") and docker(
+        "version", "--format", "{{.Client.Version}}"
+    ) != baseline["docker_version"]:
+        raise RuntimeError("Docker CLI version does not match the reviewed demo baseline")
+    if baseline.get("engine_version") and docker(
+        "version", "--format", "{{.Server.Version}}"
+    ) != baseline["engine_version"]:
+        raise RuntimeError("Docker Engine version does not match the reviewed demo baseline")
+    if baseline.get("buildx_version") and docker("buildx", "version") != baseline[
+        "buildx_version"
+    ]:
+        raise RuntimeError("Docker Buildx version does not match the reviewed demo baseline")
+    if baseline.get("python_version"):
+        import platform
+
+        if platform.python_version() != baseline["python_version"]:
+            raise RuntimeError("Python version does not match the reviewed demo baseline")
     if (
         docker("context", "inspect", "default", "--format", "{{.Endpoints.docker.Host}}")
         != "unix:///var/run/docker.sock"
@@ -87,12 +173,26 @@ def recover_owned(kind: str, name: str, nonce: str) -> str | None:
     return str(obj["Id"])
 
 
-def rehearse(scenario: str) -> dict:
+def rehearse(
+    scenario: str,
+    *,
+    baseline_path: Path | None = None,
+    baseline_sha256: str | None = None,
+    expected_version: str | None = None,
+    resource_prefix: str | None = None,
+) -> dict:
     # Fixture rejection occurs before any container or database is created.
     rows = _validate_rows(load_scenarios(ROOT, scenario_id=scenario)[scenario]["rows"])
-    baseline = preflight()
+    if baseline_path is None and baseline_sha256 is None and expected_version is None:
+        baseline = preflight()
+    else:
+        baseline = preflight(
+            baseline_path=baseline_path,
+            baseline_sha256=baseline_sha256,
+            expected_version=expected_version,
+        )
     nonce = secrets.token_hex(8)
-    name = "pmr-demo-v1-" + nonce
+    name = (resource_prefix or RESOURCE_PREFIX) + nonce
     network_id = None
     container_id = None
     relay = None

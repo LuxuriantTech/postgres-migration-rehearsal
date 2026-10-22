@@ -1,0 +1,130 @@
+{
+  "version": "PMR-DEMO-20261022-v2",
+  "source_commit": "d66fb679f64a08d9bbffc4f155ffcb20d743aabb",
+  "source_baseline": {
+    "version": "PMR-DEMO-20260908-v1",
+    "sha256": "feb4ce482d64d4331d080a5c518ecdc8bc716e810f2e57e486a942928be50dd4",
+    "source_files_verified": 22,
+    "status": "passed by V2 read-only preflight before resource creation"
+  },
+  "docker_repository_signature": {
+    "repository": "https://download.docker.com/linux/ubuntu",
+    "suite": "noble",
+    "component": "stable",
+    "key_primary_fingerprint": "9DC858229FC7DD38854AE2D88D81803C0EBFCD88",
+    "key_signing_subkey_fingerprint": "D3306A018370199E527AE7997EA0A9C3F273FCD8",
+    "verification": "gpgv accepted cached InRelease; gpgv: Signature made Tue 20 Oct 2026 11:02:16 AM CEST gpgv:                using RSA key 7EA0A9C3F273FCD8 gpgv: Good signature from \"Docker Release (CE deb) <docker@docker.com>\"",
+    "inrelease_sha256": "bee03aa9b5f1939728cee4a72c670128f96b7b034a14f4700bdc356888235974",
+    "package_index": {
+      "sha256": "140fe286549dfb9ad196c7b92257e8bcfe0df88f7b27e4fbe2cf9800c8a150a4",
+      "size": 476337,
+      "path": "stable/binary-amd64/Packages",
+      "local_sha256": "140fe286549dfb9ad196c7b92257e8bcfe0df88f7b27e4fbe2cf9800c8a150a4",
+      "local_size": 476337,
+      "matches_signed_inrelease": true
+    }
+  },
+  "authenticated_packages": [
+    {
+      "name": "docker-ce-cli",
+      "version": "5:29.8.2-1~ubuntu.24.04~noble",
+      "archive_sha256": "008b3b49b474136063fe0fbe8999b0e77c3e8556d7f7de21f98f05715e2f76ba",
+      "archive_size": 17549632,
+      "binary_path": "/usr/bin/docker",
+      "binary_sha256": "5fbf1d65d05315a4e89f561fee89731cec1f95094b86a56fac47e240edbf7bac",
+      "binary_matches_downloaded_official_archive": true,
+      "dpkg_verify": "passed"
+    },
+    {
+      "name": "docker-ce",
+      "version": "5:29.8.2-1~ubuntu.24.04~noble",
+      "archive_sha256": "b53a44a6ff13277710978adbdbfea27fcdd7ac9f198017e733d2b8dc2343f8dc",
+      "archive_size": 24358876,
+      "binary_path": "/usr/bin/dockerd",
+      "binary_sha256": "f6dde8d4a360f4b16d0ebbd4993f14457c1fc442a89ed39e726343787869d890",
+      "binary_matches_downloaded_official_archive": true,
+      "dpkg_verify": "passed"
+    },
+    {
+      "name": "docker-buildx-plugin",
+      "version": "0.37.1-1~ubuntu.24.04~noble",
+      "archive_sha256": "3c398af6eea280ddb57f32334d83867efd2bf07c4bc1be75fbd0a61c490ea925",
+      "archive_size": 17272004,
+      "binary_path": "/usr/libexec/docker/cli-plugins/docker-buildx",
+      "binary_sha256": "3e6dcf88055ca9e59013376bf989c221b76c557460f1d47175aeb14a0e98c93c",
+      "binary_matches_downloaded_official_archive": true,
+      "dpkg_verify": "passed"
+    }
+  ],
+  "runtime": {
+    "operating_system": "Ubuntu 24.04.5 LTS under WSL 2",
+    "platform": "x86_64",
+    "python_version": "3.12.14",
+    "uv_version": "uv 0.11.7 (x86_64-unknown-linux-gnu)",
+    "docker_context": "default",
+    "docker_endpoint": "unix:///var/run/docker.sock",
+    "docker_client_version": "29.8.2",
+    "docker_client_commit": "7fc2dff",
+    "docker_engine_version": "29.8.2",
+    "docker_engine_commit": "8af9fe3",
+    "buildx_version": "github.com/docker/buildx v0.37.1 0b265a9f62db554fa9aba6dd19e1bd5704bc7d8a",
+    "buildkit_version": "v0.33.1"
+  },
+  "image_build_receipt": {
+    "path": "image-build.json",
+    "sha256": "2ca53f545829bd8ab9b4e8ee6bae8c241580f34d48ccb842d35d513165b52585",
+    "log_path": "image-build.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "manifest": "sha256:1a5aa9ff157a2390e11e5e30965be8c4f1d50ea14264f2dd4f9c38bd4ad7cbbd",
+    "config": "sha256:d3b733054757a7473a37b8f9f8f5fd5d60dddb5b2f3a54260f9d866daba4cd18",
+    "reproduced_v1_identity": true
+  },
+  "rehearsal_receipt": {
+    "path": "rehearsal-result.json",
+    "sha256": "ff8366e6e5c1002244747e45d299aa7a71d2c09b5398c469c99c427e14087550",
+    "run_id": "e98c1adbab79af85f9066d4e56a6e5aa4878460cd6073b2f5a1fb3ff99cda61e",
+    "verdict": "LOCAL_REHEARSAL_PASSED",
+    "source_rows": 6,
+    "destination_rows": 6,
+    "migration_final_phase": "contract",
+    "backfill": {
+      "cycles": 2,
+      "initial_first_pass_rows": 6,
+      "initial_idempotent_pass_rows": 0,
+      "roll_forward_first_pass_rows": 6,
+      "roll_forward_idempotent_pass_rows": 0
+    },
+    "rollback": {
+      "down_phase": "initial",
+      "legacy_rows_restored": true,
+      "roll_forward_complete": true
+    },
+    "cleanup_state": "complete",
+    "owned_resources_remaining": 0,
+    "historical_phase_b_replayed": false,
+    "post_run_v2_containers": [],
+    "post_run_v2_networks": [],
+    "active_container_count_after": 11,
+    "network_count_after": 12
+  },
+  "scope_limit": "Six synthetic invoices only; no full-volume, concurrent-client, or failpoint qualification.",
+  "v2_baseline_sha256": "e317bbab8e8dc8e9db63272990da4094fcf344eda4dc62ebcdc915b3e84f7c39",
+  "reviewed_candidate_files": {
+    "scripts/rehearse_baseline_v1.py": "7df83443d288e0e23c663b463f125f2b585fb8d110861c6e086ef8457078653e",
+    "scripts/rehearse_baseline_v2.py": "d759692a9f73eeace7f2561cce6da54cd8eff3533a5e7875d1e2fd77e8beefcb",
+    "scripts/verify_demo_baseline_v2_build.py": "4986a05f6f647fb78f491a27aea88728c56fac0d30f9f7acf31fa5dcd2c87447",
+    "tests/test_demo_baseline_v2.py": "69cf3c4919aab2a6946bd43e1ff4644b3696056f947ab00f9c86fac72fdfac7a"
+  },
+  "reproducible_provenance_verification": {
+    "verifier": "scripts/verify_docker_repository_provenance.py",
+    "result": "verified",
+    "receipt": "package-verification.json",
+    "receipt_sha256": "75eafc4f412b74bf11bf9ff8a341358756ec689398d4688348a6b9befc4275e1",
+    "retained_evidence": {
+      "InRelease": "bee03aa9b5f1939728cee4a72c670128f96b7b034a14f4700bdc356888235974",
+      "Packages": "140fe286549dfb9ad196c7b92257e8bcfe0df88f7b27e4fbe2cf9800c8a150a4",
+      "docker.asc": "1500c1f56fa9e26b9b8f42452a553675796ade0807cdce11975eb98170b3a570"
+    },
+    "verifier_sha256": "2f266cc44ea6a0bb7f86b347789f10b7cf2a78588caee3f5d1e229d5a0547115"
+  }
+}
