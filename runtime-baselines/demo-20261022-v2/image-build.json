@@ -1,0 +1,56 @@
+{
+  "version": "PMR-DEMO-20261022-v2",
+  "source_commit": "d66fb679f64a08d9bbffc4f155ffcb20d743aabb",
+  "build_command": [
+    "/usr/bin/docker",
+    "--context",
+    "default",
+    "buildx",
+    "build",
+    "--platform",
+    "linux/amd64",
+    "--no-cache",
+    "--provenance=false",
+    "--build-arg",
+    "SOURCE_DATE_EPOCH=1788825600",
+    "--output",
+    "type=oci,rewrite-timestamp=true,dest=<temporary OCI archive>",
+    "--metadata-file",
+    "<temporary metadata file>",
+    "runtime-baselines/demo-20260908"
+  ],
+  "source_date_epoch": 1788825600,
+  "result": {
+    "build": "passed",
+    "image_config": "sha256:d3b733054757a7473a37b8f9f8f5fd5d60dddb5b2f3a54260f9d866daba4cd18",
+    "image_manifest": "sha256:1a5aa9ff157a2390e11e5e30965be8c4f1d50ea14264f2dd4f9c38bd4ad7cbbd",
+    "materials_verified": 3,
+    "platform": "linux/amd64"
+  },
+  "image_manifest": "sha256:1a5aa9ff157a2390e11e5e30965be8c4f1d50ea14264f2dd4f9c38bd4ad7cbbd",
+  "image_config": "sha256:d3b733054757a7473a37b8f9f8f5fd5d60dddb5b2f3a54260f9d866daba4cd18",
+  "platform": {
+    "architecture": "amd64",
+    "os": "linux"
+  },
+  "build_materials": [
+    {
+      "uri": "pkg:docker/postgres@18.6-alpine3.24?digest=sha256:63bdc97d67b5133bf0e5ebd500bec6d046fa851dc81340d838f0347e616107e8&platform=linux%2Famd64",
+      "sha256": "63bdc97d67b5133bf0e5ebd500bec6d046fa851dc81340d838f0347e616107e8"
+    },
+    {
+      "uri": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libcrypto3-3.5.8-r0.apk",
+      "sha256": "161223a16f042b8e469e9441291e071464fd91d4f4bbe6f496ee8d0abd4e0701"
+    },
+    {
+      "uri": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libssl3-3.5.8-r0.apk",
+      "sha256": "aca521e5ae4a321322a9d47ed64a1775f5ab1ffd215d1e9fc0433c58f7bfd037"
+    }
+  ],
+  "temporary_oci_archive_bytes": 124920320,
+  "temporary_oci_archive_sha256": "7e2101c3027e8857d1632db888c895ec523d162a7f8eba21a1a35bc773cd8a50",
+  "temporary_oci_archive_retained": false,
+  "provenance_build_type": "https://mobyproject.org/buildkit@v1",
+  "buildx_version": "github.com/docker/buildx v0.37.1 0b265a9f62db554fa9aba6dd19e1bd5704bc7d8a",
+  "buildkit_version": "v0.33.1"
+}

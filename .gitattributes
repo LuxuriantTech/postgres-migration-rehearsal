@@ -6,3 +6,6 @@
 *.py text eol=lf
 *.sql text eol=lf
 Dockerfile text eol=lf
+
+# Signed apt metadata and key are retained as literal provenance evidence.
+runtime-baselines/demo-20261022-v2/docker-repository/* -text

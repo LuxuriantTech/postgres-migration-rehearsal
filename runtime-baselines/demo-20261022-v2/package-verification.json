@@ -1,0 +1,29 @@
+{
+  "packages": [
+    {
+      "archive_sha256": "008b3b49b474136063fe0fbe8999b0e77c3e8556d7f7de21f98f05715e2f76ba",
+      "binary_sha256": "5fbf1d65d05315a4e89f561fee89731cec1f95094b86a56fac47e240edbf7bac",
+      "package": "docker-ce-cli",
+      "status": "verified",
+      "version": "5:29.8.2-1~ubuntu.24.04~noble"
+    },
+    {
+      "archive_sha256": "b53a44a6ff13277710978adbdbfea27fcdd7ac9f198017e733d2b8dc2343f8dc",
+      "binary_sha256": "f6dde8d4a360f4b16d0ebbd4993f14457c1fc442a89ed39e726343787869d890",
+      "package": "docker-ce",
+      "status": "verified",
+      "version": "5:29.8.2-1~ubuntu.24.04~noble"
+    },
+    {
+      "archive_sha256": "3c398af6eea280ddb57f32334d83867efd2bf07c4bc1be75fbd0a61c490ea925",
+      "binary_sha256": "3e6dcf88055ca9e59013376bf989c221b76c557460f1d47175aeb14a0e98c93c",
+      "package": "docker-buildx-plugin",
+      "status": "verified",
+      "version": "0.37.1-1~ubuntu.24.04~noble"
+    }
+  ],
+  "signature": "gpgv: Signature made Tue 20 Oct 2026 11:02:16 AM CEST\ngpgv:                using RSA key 7EA0A9C3F273FCD8\ngpgv: Good signature from \"Docker Release (CE deb) <docker@docker.com>\"",
+  "signed_index": "stable/binary-amd64/Packages",
+  "signed_index_sha256": "140fe286549dfb9ad196c7b92257e8bcfe0df88f7b27e4fbe2cf9800c8a150a4",
+  "status": "verified"
+}
