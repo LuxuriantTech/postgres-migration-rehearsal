@@ -46,13 +46,14 @@ def test_v2_manifest_is_exact_and_keeps_v1_image_and_source_pins() -> None:
 
 def test_v2_preflight_uses_its_own_reviewed_manifest(monkeypatch: pytest.MonkeyPatch) -> None:
     observed: dict[str, object] = {}
+    preflight_result: dict[str, object] = {"version": MODULE.BASELINE_VERSION}
 
-    def fake_preflight(**kwargs: object) -> dict:
+    def fake_preflight(**kwargs: object) -> dict[str, object]:
         observed.update(kwargs)
-        return BASELINE
+        return preflight_result
 
     monkeypatch.setattr(MODULE.runtime, "preflight", fake_preflight)
-    assert MODULE.preflight() is BASELINE
+    assert MODULE.preflight() is preflight_result
     assert observed == {
         "baseline_path": MODULE.BASELINE,
         "baseline_sha256": MODULE.BASELINE_SHA256,
@@ -63,10 +64,11 @@ def test_v2_preflight_uses_its_own_reviewed_manifest(monkeypatch: pytest.MonkeyP
 def test_v2_rehearsal_uses_a_distinct_resource_prefix(monkeypatch: pytest.MonkeyPatch) -> None:
     observed: dict[str, object] = {}
 
-    def fake_rehearse(scenario: str, **kwargs: object) -> dict:
+    def fake_rehearse(scenario: str, **kwargs: object) -> dict[str, object]:
         observed["scenario"] = scenario
         observed.update(kwargs)
-        return {"ok": True}
+        result: dict[str, object] = {"ok": True}
+        return result
 
     monkeypatch.setattr(MODULE.runtime, "rehearse", fake_rehearse)
     assert MODULE.rehearse("small-shop") == {"ok": True}
