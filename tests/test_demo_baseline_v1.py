@@ -29,6 +29,18 @@ def test_exact_reviewed_image_identity() -> None:
     )
 
 
+def test_docker_executable_integrity_reports_expected_and_observed(tmp_path: Path) -> None:
+    docker = tmp_path / "docker"
+    docker.write_bytes(b"unreviewed docker executable")
+    with pytest.raises(RuntimeError, match="expected sha256:.*got sha256:.*do not update the pin"):
+        MODULE.verify_docker_binary(docker, BASELINE["docker_sha256"])
+
+
+def test_missing_docker_executable_is_actionable(tmp_path: Path) -> None:
+    with pytest.raises(RuntimeError, match="required Docker executable is unavailable"):
+        MODULE.verify_docker_binary(tmp_path / "docker", BASELINE["docker_sha256"])
+
+
 @pytest.mark.parametrize(
     "field,value",
     [

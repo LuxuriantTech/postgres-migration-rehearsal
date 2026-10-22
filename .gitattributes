@@ -1,2 +1,8 @@
 # Keep portable shell entry points in LF form.
 *.sh text eol=lf
+
+# Baseline source digests are over exact repository bytes on every platform.
+*.json text eol=lf
+*.py text eol=lf
+*.sql text eol=lf
+Dockerfile text eol=lf

@@ -40,10 +40,29 @@ def verify_image(image: dict, baseline: dict) -> None:
         raise RuntimeError("demo baseline image identity mismatch")
 
 
+def verify_docker_binary(path: Path, expected_sha256: str) -> None:
+    try:
+        actual_sha256 = hashlib.sha256(path.read_bytes()).hexdigest()
+    except OSError as error:
+        raise RuntimeError(f"required Docker executable is unavailable: {path}") from error
+    if actual_sha256 != expected_sha256:
+        raise RuntimeError(
+            "Docker executable integrity check failed at "
+            f"{path}: expected sha256:{expected_sha256}, got sha256:{actual_sha256}. "
+            "Use the reviewed Linux amd64 Docker executable; do not update the pin "
+            "to bypass this check."
+        )
+
+
 def preflight() -> dict:
     raw = BASELINE.read_bytes()
-    if hashlib.sha256(raw).hexdigest() != BASELINE_SHA256:
-        raise RuntimeError("reviewed demo baseline manifest changed")
+    actual_baseline_sha256 = hashlib.sha256(raw).hexdigest()
+    if actual_baseline_sha256 != BASELINE_SHA256:
+        raise RuntimeError(
+            "reviewed demo baseline manifest changed: "
+            f"expected sha256:{BASELINE_SHA256}, got sha256:{actual_baseline_sha256}. "
+            "Check that Git preserved LF line endings in pinned files."
+        )
     baseline = json.loads(raw)
     if baseline["version"] != "PMR-DEMO-20260908-v1":
         raise RuntimeError("unknown demo baseline")
@@ -60,8 +79,7 @@ def preflight() -> dict:
         )
     ):
         raise RuntimeError("container runtime overrides are not allowed")
-    if hashlib.sha256(Path(DOCKER).read_bytes()).hexdigest() != baseline["docker_sha256"]:
-        raise RuntimeError("demo baseline Docker executable changed")
+    verify_docker_binary(Path(DOCKER), baseline["docker_sha256"])
     if (
         docker("context", "inspect", "default", "--format", "{{.Endpoints.docker.Host}}")
         != "unix:///var/run/docker.sock"
