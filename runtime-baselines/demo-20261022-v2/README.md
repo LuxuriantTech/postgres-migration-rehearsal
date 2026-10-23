@@ -10,14 +10,39 @@ The exact Docker CLI, Engine and Buildx package versions, signed repository meta
 
 ## Build and run
 
-Start from a fresh WSL-native checkout as described in the [V1 procedure](../demo-20260908/README.md#windows-with-wsl-2). Keep the checkout in the WSL filesystem and preserve LF bytes for the pinned source files. The V2 baseline expects the exact Python, Docker CLI, Engine and Buildx versions recorded above; do not edit its hashes to accept a different runtime.
+Use WSL 2 with Ubuntu 24.04.5 LTS on Linux amd64. Keep a fresh checkout in the WSL filesystem so pinned source bytes and Linux bind mounts are stable. The public procedure was checked at repository commit [`626072c`](https://github.com/LuxuriantTech/postgres-migration-rehearsal/tree/626072c0eac87f0b05c287c51f9cc5f150299c9e). Do not run these commands in PowerShell or against a Windows-mounted checkout.
+
+Clone that reviewed snapshot, install the locked Python environment, and confirm the interpreter. If `uv python find` succeeds, no Python download is needed; if it fails, `uv python install` installs the pinned interpreter before dependency sync:
+
+```sh
+set -euo pipefail
+mkdir -p ~/src
+cd ~/src
+git -c core.autocrlf=false clone https://github.com/LuxuriantTech/postgres-migration-rehearsal.git pmr-v2
+cd pmr-v2
+git checkout --detach 626072c0eac87f0b05c287c51f9cc5f150299c9e
+uv python find 3.12.14 >/dev/null 2>&1 || uv python install 3.12.14
+uv sync --frozen
+uv run --frozen python --version
+```
+
+The Docker runtime is a separately installed prerequisite. If the official Docker Ubuntu apt source is already configured and these exact versions are available, install or align the three pinned packages with:
+
+```sh
+sudo apt-get update
+sudo apt-get install --no-install-recommends \
+  'docker-ce-cli=5:29.8.2-1~ubuntu.24.04~noble' \
+  'docker-ce=5:29.8.2-1~ubuntu.24.04~noble' \
+  'docker-buildx-plugin=0.37.1-1~ubuntu.24.04~noble'
+```
+
+This may change system packages, so run it only when you intend to prepare the host. If the exact package versions are unavailable, stop rather than substituting the latest version. The signed provenance below authenticates the expected archives and executable hashes; the V2 preflight enforces the installed package versions and hashes.
 
 Install the locked Python environment, then build a temporary OCI archive. The verifier checks the manifest, config, platform and all three recorded BuildKit materials before the archive is loaded:
 
 ```sh
-uv python install 3.12.14
-uv sync --frozen
 uv run --frozen python --version
+dpkg-query -W docker-ce-cli docker-ce docker-buildx-plugin
 docker context show
 docker context inspect default --format '{{.Endpoints.docker.Host}}'
 sha256sum /usr/bin/docker /usr/bin/dockerd /usr/libexec/docker/cli-plugins/docker-buildx
@@ -46,4 +71,21 @@ The build verifier stops if the fresh output differs from the reviewed manifest,
 
 [rehearsal-result.json](rehearsal-result.json) is the exact V2 runner output. Six source rows matched six destination rows in EUR minor units. The migration reached the contract phase, both backfill passes were idempotent on their second pass, rollback restored the legacy rows, roll-forward completed, and cleanup reported `complete` with zero owned resources remaining. The post-run `pmr-demo-v2-` container and network filters were empty; active container and network counts returned to their pre-run values of 11 and 12.
 
-This is a bounded synthetic run. It does not qualify full-volume behavior, concurrent clients or failpoints, and `historical_phase_b_replayed` is false. The hosted static walkthrough remains a separate product surface.
+This is a bounded synthetic run. It does not qualify full-volume behavior, concurrent clients or failpoints, and `historical_phase_b_replayed` is false. The hosted static walkthrough remains a separate product surface and never runs SQL.
+
+## Refusal, rollback and return
+
+Every failed identity check is a stop condition. A manifest, config, platform or BuildKit-material mismatch from the build verifier means the candidate image is not loaded; keep the V2 and V1 pins unchanged. A package-provenance or preflight failure means no rehearsal resources were created. Preserve the command output and correct the environment before restarting from the matching verification step.
+
+The deliberate `invalid-negative-amount` scenario exits with `Amount must be a positive whole number of cents.` before Docker preflight or resource creation. It demonstrates rejection; it is not a migration failure. Do not use it as the successful result.
+
+The `small-shop` runner itself performs rollback to the legacy shape and then roll-forward through contract before returning JSON. A successful result has `verdict: LOCAL_REHEARSAL_PASSED`, `rollback.legacy_rows_restored: true`, `rollback.roll_forward_complete: true`, `cleanup_state: complete`, and `owned_resources_remaining: 0`. It also states `historical_phase_b_replayed: false`. No second rollback command is needed.
+
+After an error or successful run, inspect only this run's V2 name prefix:
+
+```sh
+docker ps -a --filter name=pmr-demo-v2-
+docker network ls --filter name=pmr-demo-v2-
+```
+
+Both listings should be empty after cleanup. If a listing is not empty, stop, preserve the result and inspect the exact resource labels/IDs before taking action; do not remove unrelated containers, networks or the shared reviewed image. Once the preflight passes and the resource listings are empty, rerun `small-shop` to return to a clean successful result.
