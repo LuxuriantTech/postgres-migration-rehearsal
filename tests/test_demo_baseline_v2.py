@@ -8,6 +8,8 @@ from pathlib import Path
 
 import pytest
 
+from migration_rehearsal.control_room_adapter import FixtureValidationError
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 SPEC = importlib.util.spec_from_file_location(
@@ -75,6 +77,55 @@ def test_v2_rehearsal_uses_a_distinct_resource_prefix(monkeypatch: pytest.Monkey
     assert observed["scenario"] == "small-shop"
     assert observed["resource_prefix"] == "pmr-demo-v2-"
     assert observed["expected_version"] == MODULE.BASELINE_VERSION
+
+
+def test_invalid_scenario_is_rejected_before_runtime_preflight(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def unexpected_preflight(**kwargs: object) -> dict[str, object]:
+        raise AssertionError("invalid fixture must be rejected before runtime preflight")
+
+    monkeypatch.setattr(MODULE.runtime, "preflight", unexpected_preflight)
+    with pytest.raises(FixtureValidationError, match="Amount must be a positive whole number"):
+        MODULE.rehearse("invalid-negative-amount")
+
+
+def test_recorded_v2_result_reports_rollback_cleanup_and_historical_boundary() -> None:
+    result = json.loads(
+        (ROOT / "runtime-baselines/demo-20261022-v2/rehearsal-result.json").read_text()
+    )
+
+    assert result["verdict"] == "LOCAL_REHEARSAL_PASSED"
+    assert len(result["source_rows"]) == len(result["destination_rows"]) == 6
+    assert result["evidence"]["integrity"]["destination_matches_source"] is True
+    assert result["evidence"]["rollback"] == {
+        "down_phase": "initial",
+        "legacy_rows_restored": True,
+        "roll_forward_complete": True,
+    }
+    assert result["cleanup_state"] == "complete"
+    assert result["owned_resources_remaining"] == 0
+    assert result["historical_phase_b_replayed"] is False
+
+
+def test_v2_procedure_covers_pinned_install_run_refusal_and_return() -> None:
+    procedure = (ROOT / "runtime-baselines/demo-20261022-v2/README.md").read_text()
+
+    for required in (
+        "git checkout --detach 626072c0eac87f0b05c287c51f9cc5f150299c9e",
+        "uv python find 3.12.14",
+        "uv sync --frozen",
+        "docker-ce-cli=5:29.8.2-1~ubuntu.24.04~noble",
+        "verify_docker_repository_provenance.py",
+        "verify_demo_baseline_v2_build.py",
+        "rehearse_baseline_v2.py --scenario small-shop",
+        "invalid-negative-amount",
+        "rollback.legacy_rows_restored: true",
+        "cleanup_state: complete",
+        "docker ps -a --filter name=pmr-demo-v2-",
+        "historical_phase_b_replayed` is false",
+    ):
+        assert required in procedure
 
 
 def test_build_verifier_accepts_only_the_reviewed_image_and_materials(
