@@ -1,6 +1,6 @@
 # PostgreSQL Migration Rehearsal
 
-[Try the interactive synthetic demo](https://ardian-mehaj-portfolio.vercel.app/projects/postgres-migration-rehearsal/) · [Demo source and local preview](docs/interactive-demo/README.md) · [Contact me](mailto:mehajardian@gmail.com)
+[Try the interactive synthetic demo](https://ardianmehaj.dev/projects/postgres-migration-rehearsal/) · [Demo source and local preview](docs/interactive-demo/README.md) · [Contact me](mailto:mehajardian@gmail.com)
 
 Rehearse a small invoice-schema change in disposable local PostgreSQL and inspect the migration, integrity checks and cleanup separately.
 
